@@ -18,6 +18,28 @@ The IIIF Image API has the notion of an image identifier as part of the [URI Syn
 * It is trivial to encode and decode Base64 in any application.
 * The IIIF Manifest generating applications are likely to have access to, or be able to calculate, the storage path of the image and use it as the image identifier.
 
+### Examples
+
+If the root of the data directory is 
+
+	images/
+
+and image is stored as tiles in this directory
+
+	images/examples/zoom_example
+
+then the identifier will be the base64 encoding of 
+
+	examples/zoom_example
+
+which is
+
+	ZXhhbXBsZXMvem9vbV9leGFtcGxl
+
+A request for a thumbnail URI may look like this
+
+	http://example.com/iiif/ZXhhbXBsZXMvem9vbV9leGFtcGxl/full/500,/0/default.jpg
+
 ## Zoomify Image Tiles
 
 If the decoded image identifier path is to a directory then it is assumed the image is stored as a Zoomify tile pyramid with a metadata file called ImageProperties.xml within that directory.
@@ -30,19 +52,19 @@ Envisaged Usage: Publishing high resolution images to IIIF Image API by exportin
 
 If the decoded image identifier is a path to a file then it is assumed this is a JPEG of the image. It will be served through the IIIF endpoint with subregions and scaling being generated on the fly. There is some caching of derived images to help improve efficiency but __this is clearly for smaller images that can be easily loaded into memory only__.
 
-Envisaged usage: Publishing lower resolution images via the IIIF Image API such as multipage manuscripts or photographs used to annotate larger canvases or image that will rarely be viewed.
+Envisaged usage: Publishing lower resolution images via the IIIF Image API such as multipage manuscripts or photographs used to annotate larger canvases or images that will rarely be viewed.
 
 ##  Setup
 
-### Config.php
+### config.php
 
 There is a config.php file with commented variables to be set including the location of the data and cache directories.
 
 ### Cache Dir
 
-An Apache writeable cache directory must be created. This is used both for when serving single file images and zoomified images. Although the zoomify version needs a lot less caching it still creates and stores full images at different resolutions when requested - typically thumbnails.
+An Apache writeable cache directory must be created. This is used both for when serving single file images and zoomified images. Although the zoomify version needs a lot less caching it still creates and stores full images at different resolutions when requested - this is very common for thumbnails.
 
-### index.php and examples
+### index.php and example images
 
 For convenience an index.php is included with links to the example images. These could be deleted in production.
 
