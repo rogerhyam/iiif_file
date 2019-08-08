@@ -3,12 +3,12 @@
 require_once('config.php');
 
 // called by cron to keep the cache from getting too big.
-$cache = 'cache';
+
 $max_size = $cache_max_size_mb * 1048576;
-$size = get_directory_size($cache);
+$size = get_directory_size($cache_dir);
 if($size > $max_size){
 	
-	$file_list = glob($cache . '/*.jpg');
+	$file_list = glob($cache_dir . '*.jpg');
 	
 	// build a list of all the files with their access time and size
 	$files_by_access = array();

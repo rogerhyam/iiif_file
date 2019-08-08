@@ -102,8 +102,10 @@ function get_closest($search, $arr) {
 }
 function return_thumbnail($file_path_full, $size, $dimension, $image_props){
 	
+	global $cache_dir;
+	
 	// check if we have a cached version of the thumbnail
-	$thumb_cached_path = 'cache/' . str_replace('/', '_', $file_path_full) . '-thumb-' . $dimension . '-'. $size . '.jpg';
+	$thumb_cached_path = $cache_dir . str_replace('/', '_', $file_path_full) . '-thumb-' . $dimension . '-'. $size . '.jpg';
 	if(file_exists($thumb_cached_path)){
 		header("Content-Type: image/jpeg");
 		readfile($thumb_cached_path);
@@ -125,7 +127,7 @@ function return_thumbnail($file_path_full, $size, $dimension, $image_props){
 	}
 	
 	// load the full image 
-	$full_cached_path = 'cache/' . str_replace('/', '_', $file_path_full) . '_level-' . $level . '.jpg';
+	$full_cached_path = $cache_dir . str_replace('/', '_', $file_path_full) . '_level-' . $level . '.jpg';
 	if(file_exists($full_cached_path)){
 		$image = new Imagick($full_cached_path);
 	}else{
@@ -147,7 +149,9 @@ function return_thumbnail($file_path_full, $size, $dimension, $image_props){
 }
 function return_full_image($file_path, $level, $image_props){
 	
-	$cached_file_path = 'cache/' . str_replace('/', '_', $file_path) . '_level-' . $level . '.jpg';
+	global $cache_dir;
+	
+	$cached_file_path = $cache_dir . str_replace('/', '_', $file_path) . '_level-' . $level . '.jpg';
 
 	// check if we have it cached before we do anything else
 	if(file_exists($cached_file_path)){

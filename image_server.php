@@ -114,7 +114,7 @@ if($image_props['is_tile_pyramid']){
 	
 	// do we have a cached version of this view
 	$cached_file_name = $region_x .'_'. $region_y .'_'. $region_w .'_'. $region_h .'_'. $size_w .'_'. $size_h . '.jpg';
-	$cached_file_path = "cache/" . str_replace('/', '_', $file_path_full) . '_' . $cached_file_name;
+	$cached_file_path = $cache_dir . str_replace('/', '_', $file_path_full) . '_' . $cached_file_name;
 	if(file_exists($cached_file_path)){
 		header('Content-Type: image/jpeg');
 		header("Access-Control-Allow-Origin: *");

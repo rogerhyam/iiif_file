@@ -9,6 +9,7 @@ date_default_timezone_set('UTC');
 
 $subdirectory = '/'; // within the URL - you may want to change this if you're not hosting at the web root.
 $image_root_dir = 'images/'; // the directory where your images are. Could be absolute (real) or relative to script. End with a slash. 
+$cache_dir = 'cache/'; // the directory where generated images will be cached so they don't have to be created with every request.
 
 $cache_max_size_mb = 500; // the cache_manager.php (called by cron occassionally) will keep the cache dir to this size.
 
