@@ -1,0 +1,7 @@
+._.DS_Store
+.DS_Store
+._*
+images/*
+!images/examples/
+cache/*
+

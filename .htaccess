@@ -1,0 +1,25 @@
+
+# we use mod headers to add the access control just to be sure 
+# everything is accessible from everywhere
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+</IfModule>
+
+
+# we use mod rewrite to 
+<IfModule mod_rewrite.c>
+
+   RewriteEngine On
+   
+   # catch the index file for empty path
+   RewriteRule ^$ index.php [PT]
+  
+   # Presentation API
+   RewriteRule ^([^/]*)/manifest$  manifest.php?file=$1 [PT]
+
+   # Image API
+   RewriteRule ^([^/]*)/info\.json  image_info.php?file=$1 [PT]
+   # {scheme}://{server}{/prefix}/{identifier}/{region}/{size}/{rotation}/{quality}.{format}
+   RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)\.jpg image_server.php?file=$1&region=$2&size=$3&rotation=$4&quality=$5 [PT]
+   
+</IfModule>
