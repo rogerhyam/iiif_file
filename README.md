@@ -64,6 +64,11 @@ There is a config.php file with commented variables to be set including the loca
 
 An Apache writeable cache directory must be created. This is used both for when serving single file images and zoomified images. Although the zoomify version needs a lot less caching it still creates and stores full images at different resolutions when requested - this is very common for thumbnails.
 
+The cache_manager.php script that will maintain this directory at a certain size by deleting files that have not been accessed for a while. To do this it needs to be called regularly by a cron job. Adding something like this to your crontab will accomplish this.
+
+	22 6 * * * wget -O - https://example.com/something/cache_clean.php > /dev/null 2>&1
+
+
 ### index.php and example images
 
 For convenience an index.php is included with links to the example images. These could be deleted in production.
